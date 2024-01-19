@@ -1,7 +1,7 @@
 #include "sort.h"
-int partition(int *array, size_t low, size_t hig);
+int partition(int *arr, size_t low, size_t hig, int size);
 void swap(int *a, int *b);
-void sort(int *array, int low, int hig);
+void sort(int *array, int low, int hig, int size);
 
 /**
  * quick_sort - sorter function
@@ -12,7 +12,7 @@ void sort(int *array, int low, int hig);
  */
 void quick_sort(int *array, size_t size)
 {
-sort(array, 0, size - 1);
+  sort(array, 0, size - 1, size);
 }
 /**
  * partition - sorter function
@@ -22,20 +22,22 @@ sort(array, 0, size - 1);
  *
  * Return: int
  */
-int partition(int *array, size_t low, size_t hig)
+int partition(int *arr, size_t low, size_t hig, int size)
 {
 	size_t j, i = (low - 1);
-	int pivot = array[hig];
-
+	int pivot = arr[hig];
+	
 	for (j = low; j < hig; j++)
 		{
-			if (array[j] <= pivot)
+			if (arr[j] <= pivot)
 			{
 				i++;
-				swap(&array[i], &array[j]);
+				swap(&arr[i], &arr[j]);
+				print_array(arr, size);
 			}
 		}
-	swap(&array[hig], &array[i + 1]);
+	swap(&arr[hig], &arr[i + 1]);
+	print_array(arr, size);
 	return (i + 1);
 }
 
@@ -61,13 +63,13 @@ void swap(int *a, int *b)
  *
  * Return: int
  */
-void sort(int *array, int low, int hig)
+void sort(int *array, int low, int hig, int size)
 {
 	if (low < hig)
 		{
-			int pivo = partition(array, low, hig);
+		  int pivo = partition(array, low, hig, size);
 
-			sort(array, low, (pivo - 1));
-			sort(array, (pivo + 1), hig);
+		  sort(array, low, (pivo - 1), size);
+		  sort(array, (pivo + 1), hig, size);
 		}
 }
