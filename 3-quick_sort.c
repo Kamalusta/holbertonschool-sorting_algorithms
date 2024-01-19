@@ -11,8 +11,9 @@ void sort(int *array, int low, int hig);
  * Return: Always 0
  */
 void quick_sort(int *array, size_t size)
+{
 sort(array, 0, size - 1);
-
+}
 /**
  * partition - sorter function
  * @array: - sorted array
